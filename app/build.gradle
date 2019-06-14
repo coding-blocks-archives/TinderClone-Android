@@ -33,6 +33,6 @@ dependencies {
     //Firebase
     implementation 'com.google.firebase:firebase-auth:17.0.0'
 
+    implementation 'com.hbb20:ccp:2.2.9'
+
 }
-
-
