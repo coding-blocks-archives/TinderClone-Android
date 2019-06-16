@@ -36,6 +36,7 @@
 
          <TextView
              android:textSize="16sp"
+             android:id="@+id/numberTv"
              android:textColor="@color/battleship_gray"
              tools:text="+91 95820 54664 "
              android:layout_width="wrap_content"
@@ -45,7 +46,7 @@
                 android:layout_marginStart="22dp"
                 android:textSize="16sp"
                 android:textColor="@android:color/black"
-                tools:text="Resend"
+                android:text="Resend"
                 android:textAllCaps="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -53,8 +54,53 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_margin="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/otp1"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:maxLength="1"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/otp2"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:maxLength="1"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/otp3"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:maxLength="1"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/otp4"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:maxLength="1"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/otp5"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:maxLength="1"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/otp6"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:maxLength="1"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/otpBtn"
+            android:id="@+id/otpVerify"
             android:enabled="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
