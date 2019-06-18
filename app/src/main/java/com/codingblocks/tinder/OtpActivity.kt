@@ -56,6 +56,7 @@ class OtpActivity : AppCompatActivity() {
             it?.addTextChangedListener(GenericTextWatcher(it))
         }
 
+
         //Initializing Variables
         database = FirebaseFirestore.getInstance()
         mAuth = FirebaseAuth.getInstance()

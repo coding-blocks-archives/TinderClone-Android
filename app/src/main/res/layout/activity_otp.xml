@@ -63,37 +63,49 @@
                 android:id="@+id/otp1"
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:maxLength="1"
+                android:textSize="24sp"
+                android:textAlignment="center"
+                android:inputType="number"
                 android:layout_height="wrap_content" />
             <EditText
                 android:id="@+id/otp2"
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:maxLength="1"
+                android:textSize="24sp"
+                android:textAlignment="center"
+                android:inputType="number"
                 android:layout_height="wrap_content" />
             <EditText
                 android:id="@+id/otp3"
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:maxLength="1"
+                android:textSize="24sp"
+                android:textAlignment="center"
+                android:inputType="number"
                 android:layout_height="wrap_content" />
             <EditText
                 android:id="@+id/otp4"
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:maxLength="1"
+                android:textSize="24sp"
+                android:textAlignment="center"
+                android:inputType="number"
                 android:layout_height="wrap_content" />
             <EditText
                 android:id="@+id/otp5"
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:maxLength="1"
+                android:textSize="24sp"
+                android:textAlignment="center"
+                android:inputType="number"
                 android:layout_height="wrap_content" />
             <EditText
                 android:id="@+id/otp6"
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:maxLength="1"
+                android:textSize="24sp"
+                android:textAlignment="center"
+                android:inputType="number"
                 android:layout_height="wrap_content" />
 
 
