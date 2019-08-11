@@ -138,6 +138,13 @@ class OtpActivity : AppCompatActivity() {
         val intentFilter = IntentFilter(SmsRetriever.SMS_RETRIEVED_ACTION)
         registerReceiver(smsVerificationReceiver, intentFilter)
 
+        otpVerify.setOnClickListener {
+            with(Intent(this,SignUpActivity::class.java)){
+                startActivity(this)
+            }
+        }
+
+
     }
 
 

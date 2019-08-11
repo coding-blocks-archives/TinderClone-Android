@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:showIn=".SignUpActivity"
+                tools:context=".fragments.SignUp1">
+    <ProgressBar
+            android:max="8"
+            android:padding="0dp"
+            android:progress="1"
+            android:layout_height="4dp"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:id="@+id/progressBar"/>
+
+    <ImageView
+            android:src="@drawable/ic_close_grey"
+            android:layout_width="48dp"
+            android:layout_below="@+id/progressBar"
+            android:layout_height="48dp" android:id="@+id/imageView"/>
+
+
+    <TextView
+            android:text="My \nemail is"
+            android:textColor="@android:color/black"
+            android:textSize="42sp" android:layout_width="wrap_content"
+            android:layout_below="@id/imageView"
+            android:layout_height="wrap_content" android:id="@+id/textView2" android:layout_toEndOf="@+id/imageView"/>
+    <androidx.appcompat.widget.AppCompatButton
+            android:text="Continue"
+            android:textSize="24sp"
+            android:background="@drawable/button_states"
+            android:layout_width="match_parent"
+            android:layout_marginStart="32dp"
+            android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:layout_marginEnd="32dp"
+            android:layout_alignParentBottom="true" android:id="@+id/button" android:layout_marginBottom="16dp"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:textSize="24sp"
+            android:ems="10"
+            android:hint="Email address"
+            android:layout_centerInParent="true"
+            android:id="@+id/editText"/>
+</RelativeLayout>

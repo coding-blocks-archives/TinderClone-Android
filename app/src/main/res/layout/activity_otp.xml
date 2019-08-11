@@ -118,10 +118,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="@drawable/button_states"
-            android:fontFamily="@font/cabin"
             android:text="Continue"
             android:textColor="@android:color/white"
-            android:textSize="18sp" />
+            android:textSize="24sp" />
     </LinearLayout>
 
 
