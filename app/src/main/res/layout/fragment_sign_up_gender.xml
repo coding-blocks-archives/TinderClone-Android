@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent" android:layout_height="match_parent"
                 tools:showIn=".SignUpActivity"
                 tools:context=".fragments.SignUp1">
     <ProgressBar
             android:max="8"
             android:padding="0dp"
-            android:progress="3"
+            android:progress="4"
             android:layout_height="4dp"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
@@ -23,7 +23,7 @@
 
 
     <TextView
-            android:text="My \nbirthday is"
+            android:text="I am a"
             android:textColor="@android:color/black"
             android:textSize="@dimen/large_heading"
             android:layout_width="wrap_content"
@@ -31,6 +31,42 @@
             android:layout_height="wrap_content"
             android:id="@+id/textView2"
             android:layout_toEndOf="@+id/imageView"/>
+
+    <com.google.android.material.chip.ChipGroup
+            android:layout_margin="32dp"
+            android:layout_centerInParent="true"
+            app:chipSpacing="16dp"
+            app:singleSelection="true"
+            android:id="@+id/genderGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <com.google.android.material.chip.Chip
+                android:text="WOMAN"
+                style="@style/customChip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        <com.google.android.material.chip.Chip
+                android:text="MAN"
+                style="@style/customChip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        <com.google.android.material.chip.Chip
+                android:text="OTHER"
+                style="@style/customChip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <CheckBox
+            android:layout_above="@id/button"
+            android:layout_marginBottom="16dp"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/battleship_gray"
+            android:text="Show my gender of my profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
     <androidx.appcompat.widget.AppCompatButton
             android:text="Continue"
             android:textSize="@dimen/heading"
@@ -38,21 +74,10 @@
             android:layout_width="match_parent"
             android:layout_marginStart="@dimen/margin_large"
             android:layout_height="wrap_content"
+            android:enabled="false"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="@dimen/margin_large"
             android:layout_alignParentBottom="true"
             android:id="@+id/button"
             android:layout_marginBottom="@dimen/margin_small"/>
-    <EditText
-            android:gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:textSize="@dimen/heading"
-            android:ems="10"
-            android:background="@null"
-            android:letterSpacing="3"
-            android:hint="DD/MM/YYYY"
-            android:layout_centerInParent="true"
-            android:id="@+id/editText"/>
 </RelativeLayout>

@@ -25,5 +25,23 @@
         <item name="colorControlNormal">@color/FieryRose</item>
     </style>
 
+    <style name="chipTextAppearance" parent="TextAppearance.MaterialComponents.Chip">
+        <item name="android:textSize">22sp</item>
+        <item name="android:fontFamily">@font/varela_round</item>
+
+    </style>
+
+    <style name="customChip" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipStrokeColor">@color/chip_stroke_color</item>
+        <item name="android:textAppearance">@style/chipTextAppearance</item>
+        <item name="android:textColor">@color/chip_text_color</item>
+        <item name="android:textAlignment">center</item>
+        <item name="chipBackgroundColor">@android:color/white</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="chipStrokeWidth">2dp</item>
+        <item name="chipCornerRadius">30dp</item>
+    </style>
+
 
 </resources>
