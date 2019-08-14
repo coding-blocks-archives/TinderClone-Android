@@ -13,7 +13,6 @@ class SignUpActivity : AppCompatActivity() {
 
         supportFragmentManager.beginTransaction()
             .add(R.id.container,SignUp1())
-            .addToBackStack("Email")
             .commit()
     }
 }

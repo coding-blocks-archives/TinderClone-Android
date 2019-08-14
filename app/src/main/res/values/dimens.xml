@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="heading">24sp</dimen>
+    <dimen name="margin_large">32dp</dimen>
+    <dimen name="margin_small">16dp</dimen>
+    <dimen name="large_heading">42sp</dimen>
+</resources>

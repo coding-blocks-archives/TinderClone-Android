@@ -18,16 +18,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_otp.numberTv
-import kotlinx.android.synthetic.main.activity_otp.otp1
-import kotlinx.android.synthetic.main.activity_otp.otp2
-import kotlinx.android.synthetic.main.activity_otp.otp3
-import kotlinx.android.synthetic.main.activity_otp.otp4
-import kotlinx.android.synthetic.main.activity_otp.otp5
-import kotlinx.android.synthetic.main.activity_otp.otp6
-import kotlinx.android.synthetic.main.activity_otp.otpToolbar
-import kotlinx.android.synthetic.main.activity_otp.otpVerify
-import kotlinx.android.synthetic.main.activity_otp.otpView
+import kotlinx.android.synthetic.main.activity_otp.*
 import java.util.concurrent.TimeUnit
 
 
@@ -260,13 +251,13 @@ class OtpActivity : AppCompatActivity() {
             if (s.length == 1) {
                 if (allOtherFilled) {
                     //if next 2 edit texts are filled , enable the pay button
-                    enableDisableButton(true)
+                    otpVerify.changeState(true)
                     hideSoftKeyboard()
                 }
             } else if (s.length > 1) {
                 if (allOtherFilled) {
                     //if all next edit texts are filled , enable the pay button
-                    enableDisableButton(true)
+                    otpVerify.changeState(true)
                     hideSoftKeyboard()
                 } else if (nextEdit != null) {
                     if (nextEdit.text.isEmpty()) {
@@ -274,19 +265,15 @@ class OtpActivity : AppCompatActivity() {
                         moveToNextEdit(nextEdit, view as EditText)
                     } else {
                         //if any other edit is not filled, stay in current edit
-                        enableDisableButton(false)
+                        otpVerify.changeState(false)
                         stayOnCurrentEdit(view as EditText)
                     }
                 }
             } else if (s.isEmpty()) {
                 if (null != previousEdit)
                     moveToPreviousEdit(previousEdit)
-                enableDisableButton(false)
+                otpVerify.changeState(false)
             }
-        }
-
-        private fun enableDisableButton(state: Boolean) {
-            otpVerify.isEnabled = state
         }
 
         override fun beforeTextChanged(arg0: CharSequence, arg1: Int, arg2: Int, arg3: Int) {}

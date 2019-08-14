@@ -3,6 +3,8 @@ package com.codingblocks.tinder
 import android.app.Activity
 import android.content.Context
 import android.view.inputmethod.InputMethodManager
+import android.widget.Button
+import androidx.appcompat.widget.AppCompatButton
 
 fun Activity.hideSoftKeyboard() {
     if (currentFocus != null) {
@@ -11,4 +13,8 @@ fun Activity.hideSoftKeyboard() {
             .INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
     }
+}
+
+fun AppCompatButton.changeState(state:Boolean){
+    this.isEnabled = state
 }

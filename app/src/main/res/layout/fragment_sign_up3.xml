@@ -8,42 +8,51 @@
     <ProgressBar
             android:max="8"
             android:padding="0dp"
-            android:progress="1"
+            android:progress="2"
             android:layout_height="4dp"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:id="@+id/progressBar"/>
 
     <ImageView
-            android:src="@drawable/ic_close_grey"
+            android:src="@drawable/ic_chevron_left_grey_700_24dp"
             android:layout_width="48dp"
             android:layout_below="@+id/progressBar"
-            android:layout_height="48dp" android:id="@+id/imageView"/>
+            android:layout_height="48dp"
+            android:id="@+id/imageView"/>
 
 
     <TextView
-            android:text="@string/email_desc"
+            android:text="My \nbirthday is"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/large_heading" android:layout_width="wrap_content"
+            android:textSize="@dimen/large_heading"
+            android:layout_width="wrap_content"
             android:layout_below="@id/imageView"
-            android:layout_height="wrap_content" android:id="@+id/textView2" android:layout_toEndOf="@+id/imageView"/>
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2"
+            android:layout_toEndOf="@+id/imageView"/>
     <androidx.appcompat.widget.AppCompatButton
             android:text="Continue"
             android:textSize="@dimen/heading"
             android:background="@drawable/button_states"
             android:layout_width="match_parent"
             android:layout_marginStart="@dimen/margin_large"
-            android:layout_height="wrap_content" android:layout_alignParentEnd="true"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_marginEnd="@dimen/margin_large"
-            android:layout_alignParentBottom="true" android:id="@+id/button"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/button"
             android:layout_marginBottom="@dimen/margin_small"/>
     <EditText
+            android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
+            android:inputType="textPersonName"
             android:textSize="@dimen/heading"
             android:ems="10"
-            android:hint="@string/email_address"
+            android:background="@null"
+            android:letterSpacing="3"
+            android:hint="DD/MM/YYYY"
             android:layout_centerInParent="true"
             android:id="@+id/editText"/>
 </RelativeLayout>
