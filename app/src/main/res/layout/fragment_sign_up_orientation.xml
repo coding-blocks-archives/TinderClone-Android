@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent" android:layout_height="match_parent"
+                tools:showIn=".SignUpActivity"
+                tools:context=".fragments.SignUp1">
+    <ProgressBar
+            android:max="8"
+            android:padding="0dp"
+            android:progress="5"
+            android:layout_height="4dp"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:id="@+id/progressBar"/>
+
+    <ImageView
+            android:src="@drawable/ic_chevron_left_grey_700_24dp"
+            android:layout_width="48dp"
+            android:layout_below="@+id/progressBar"
+            android:layout_height="48dp"
+            android:id="@+id/imageView"/>
+
+
+    <TextView
+            android:text="My Sexual \norientation is"
+            android:textColor="@android:color/black"
+            android:textSize="28sp"
+            android:layout_width="wrap_content"
+            android:layout_below="@id/imageView"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2"
+            android:layout_toEndOf="@+id/imageView"/>
+
+    <TextView
+            android:layout_alignStart="@id/textView2"
+            android:textSize="16sp"
+            android:id="@+id/description"
+            android:layout_below="@id/textView2"
+            android:textColor="@color/battleship_gray"
+            android:text="Select up to 3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:layout_alignStart="@id/textView2"
+            android:layout_below="@+id/description"
+            android:id="@+id/listView"
+            android:layout_above="@id/checkbox"
+            android:scrollbars="none"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="48dp"
+            android:layout_width="match_parent"
+            tools:listitem="@layout/item_selectable"
+            android:layout_height="wrap_content"/>
+
+    <CheckBox
+            android:id="@+id/checkbox"
+            android:layout_above="@id/button"
+            android:layout_marginBottom="16dp"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/battleship_gray"
+            android:text="Show my orientation on my profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+            android:text="Continue"
+            android:textSize="@dimen/heading"
+            android:background="@drawable/button_states"
+            android:layout_width="match_parent"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/button"
+            android:layout_marginBottom="@dimen/margin_small"/>
+</RelativeLayout>
