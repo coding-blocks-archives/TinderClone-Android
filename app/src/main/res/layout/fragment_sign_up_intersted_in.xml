@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent" android:layout_height="match_parent"
                 tools:showIn=".SignUpActivity"
                 tools:context=".fragments.SignUp1">
     <ProgressBar
             android:max="8"
             android:padding="0dp"
-            android:progress="5"
+            android:progress="6"
             android:layout_height="4dp"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
@@ -22,46 +23,42 @@
 
 
     <TextView
-            android:text="My Sexual \norientation is"
+            android:text="Show me"
             android:textColor="@android:color/black"
-            android:textSize="28sp"
+            android:textSize="@dimen/large_heading"
             android:layout_width="wrap_content"
             android:layout_below="@id/imageView"
             android:layout_height="wrap_content"
             android:id="@+id/textView2"
             android:layout_toEndOf="@+id/imageView"/>
 
-    <TextView
-            android:layout_alignStart="@id/textView2"
-            android:textSize="16sp"
-            android:id="@+id/description"
-            android:layout_below="@id/textView2"
-            android:textColor="@color/battleship_gray"
-            android:text="Select up to 3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-            android:layout_alignStart="@id/textView2"
-            android:layout_below="@+id/description"
-            android:id="@+id/recyclerView"
-            android:layout_above="@id/checkbox"
-            android:scrollbars="none"
-            android:layout_marginBottom="16dp"
-            android:layout_marginEnd="48dp"
+    <com.google.android.material.chip.ChipGroup
+            android:layout_margin="32dp"
+            android:layout_centerInParent="true"
+            app:chipSpacing="16dp"
+            app:singleSelection="true"
+            android:id="@+id/genderGroup"
             android:layout_width="match_parent"
-            tools:listitem="@layout/item_selectable"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content">
+        <com.google.android.material.chip.Chip
+                android:text="WOMEN"
+                style="@style/customChip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        <com.google.android.material.chip.Chip
+                android:text="MEN"
+                style="@style/customChip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        <com.google.android.material.chip.Chip
+                android:text="EVERYONE"
+                style="@style/customChip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-    <CheckBox
-            android:id="@+id/checkbox"
-            android:layout_above="@id/button"
-            android:layout_marginBottom="16dp"
-            android:layout_centerHorizontal="true"
-            android:textColor="@color/battleship_gray"
-            android:text="Show my orientation on my profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+    </com.google.android.material.chip.ChipGroup>
+
+
 
     <androidx.appcompat.widget.AppCompatButton
             android:text="Continue"
