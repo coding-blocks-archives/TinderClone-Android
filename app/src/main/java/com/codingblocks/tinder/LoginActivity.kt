@@ -10,7 +10,7 @@ import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_login.*
 import com.google.android.gms.auth.api.credentials.Credential.EXTRA_KEY
-import android.R.attr.data
+import com.codingblocks.tinder.extensions.hideSoftKeyboard
 import com.google.android.gms.auth.api.credentials.Credential
 
 

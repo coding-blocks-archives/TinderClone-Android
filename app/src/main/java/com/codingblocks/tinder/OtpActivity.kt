@@ -5,9 +5,12 @@ import android.content.*
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import com.codingblocks.tinder.extensions.changeState
+import com.codingblocks.tinder.extensions.hideSoftKeyboard
 import com.google.android.gms.auth.api.phone.SmsRetriever
 import com.google.android.gms.common.api.CommonStatusCodes
 import com.google.android.gms.common.api.Status
@@ -15,6 +18,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
@@ -71,6 +75,11 @@ class OtpActivity : AppCompatActivity() {
         actionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowTitleEnabled(false)
+        }
+
+        // Restore instance state
+        if (savedInstanceState != null) {
+            onRestoreInstanceState(savedInstanceState)
         }
 
         otp = arrayOf(otp1, otp2, otp3, otp4, otp5, otp6)
@@ -130,12 +139,19 @@ class OtpActivity : AppCompatActivity() {
         registerReceiver(smsVerificationReceiver, intentFilter)
 
         otpVerify.setOnClickListener {
-            with(Intent(this,SignUpActivity::class.java)){
-                startActivity(this)
-            }
+            val credential = mVerificationId?.let { it1 -> PhoneAuthProvider.getCredential(it1, getOtp()) }
+            credential?.let { it1 -> signInWithPhoneAuthCredential(it1) }
         }
 
 
+    }
+
+    private fun getOtp(): String {
+        var code = ""
+        otp.forEach {
+            code += it?.text ?: ""
+        }
+        return code
     }
 
 
@@ -184,6 +200,27 @@ class OtpActivity : AppCompatActivity() {
                     // Consent denied. User can type OTC manually.
                 }
         }
+    }
+
+    private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
+        mAuth.signInWithCredential(credential)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d(TAG, "signInWithCredential:success")
+
+                    with(Intent(this,SignUpActivity::class.java)){
+                        startActivity(this)
+                    }
+
+                } else {
+                    // Sign in failed, display a message and update the UI
+                    Log.w(TAG, "signInWithCredential:failure", task.exception)
+                    if (task.exception is FirebaseAuthInvalidCredentialsException) {
+                        // The verification code entered was invalid
+                    }
+                }
+            }
     }
 
     inner class GenericTextWatcher internal constructor(private val view: View) : TextWatcher {
