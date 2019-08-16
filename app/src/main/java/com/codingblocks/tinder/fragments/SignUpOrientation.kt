@@ -6,13 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.codingblocks.tinder.R
 import com.codingblocks.tinder.adapters.MultiSelectionAdapter
 import com.codingblocks.tinder.adapters.Orientations
+import com.codingblocks.tinder.extensions.commitWithAnimation
 import kotlinx.android.synthetic.main.fragment_sign_up_orientation.*
 
 
@@ -47,15 +47,8 @@ class SignUpOrientation : Fragment() {
         })
 
         button.setOnClickListener {
-            fragmentManager?.commit {
-                addToBackStack("Orientation")
-                setCustomAnimations(
-                    R.animator.slide_in_right,
-                    R.animator.slide_out_left,
-                    R.animator.slide_in_left,
-                    R.animator.slide_out_right)
-                replace(R.id.container,SignUpInterstedIn(), "Orientation")
-            }
+            fragmentManager?.commitWithAnimation(SignUpInterestedIn(),"Orientation")
+
         }
     }
 

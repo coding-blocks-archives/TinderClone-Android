@@ -13,7 +13,7 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sign_up)
 
         supportFragmentManager.beginTransaction()
-            .add(R.id.container,SignUpGender())
+            .add(R.id.container,SignUp1())
             .commit()
     }
 }

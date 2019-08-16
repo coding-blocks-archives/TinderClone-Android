@@ -8,9 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.codingblocks.tinder.R
+import com.codingblocks.tinder.extensions.commitWithAnimation
 import kotlinx.android.synthetic.main.fragment_sign_up_intersted_in.*
 
-class SignUpInterstedIn : Fragment() {
+class SignUpInterestedIn : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,16 +27,8 @@ class SignUpInterstedIn : Fragment() {
             button.isEnabled = chipGroup.checkedChipId != -1
         }
         button.setOnClickListener {
-            fragmentManager?.commit {
-                addToBackStack("Orientation")
-                setCustomAnimations(
-                    R.animator.slide_in_right,
-                    R.animator.slide_out_left,
-                    R.animator.slide_in_left,
-                    R.animator.slide_out_right
-                )
-                replace(R.id.container, SignUpCollege(), "Orientation")
-            }
+            fragmentManager?.commitWithAnimation(SignUpCollege(),"Interested")
+
         }
     }
 

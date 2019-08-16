@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
 import com.codingblocks.tinder.R
+import com.codingblocks.tinder.extensions.commitWithAnimation
 import kotlinx.android.synthetic.main.fragment_sign_up_gender.*
 
 class SignUpGender : Fragment() {
@@ -26,15 +26,8 @@ class SignUpGender : Fragment() {
             button.isEnabled = chipGroup.checkedChipId != -1
         }
         button.setOnClickListener {
-            fragmentManager?.commit {
-                addToBackStack("Gender")
-                setCustomAnimations(
-                    R.animator.slide_in_right,
-                    R.animator.slide_out_left,
-                    R.animator.slide_in_left,
-                    R.animator.slide_out_right)
-                replace(R.id.container,SignUpOrientation(), "Gender")
-            }
+            fragmentManager?.commitWithAnimation(SignUpOrientation(),"Gender")
+
         }
     }
 
