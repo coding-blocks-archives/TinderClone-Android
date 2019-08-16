@@ -1,11 +1,12 @@
 package com.codingblocks.tinder
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import com.codingblocks.tinder.fragments.SignUp1
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
+import com.codingblocks.tinder.fragments.SignUpPhotos
+
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -14,8 +15,12 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
         supportFragmentManager.commit {
-            add(R.id.container, SignUp1())
+            add(R.id.container, SignUpPhotos())
         }
 
+    }
+
+    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }

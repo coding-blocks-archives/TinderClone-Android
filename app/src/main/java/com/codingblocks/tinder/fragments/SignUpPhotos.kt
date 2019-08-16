@@ -1,32 +1,111 @@
 package com.codingblocks.tinder.fragments
 
 
+import android.app.Activity
+import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import com.codingblocks.tinder.R
+import com.codingblocks.tinder.adapters.PhotoClickListener
+import com.codingblocks.tinder.adapters.Photos
+import com.codingblocks.tinder.adapters.PhotosAdapter
+import com.google.android.gms.tasks.Continuation
+import com.google.android.gms.tasks.Task
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.UploadTask
+import kotlinx.android.synthetic.main.fragment_sign_up_orientation.*
+import java.io.IOException
+import java.util.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- *
- */
 class SignUpPhotos : Fragment() {
+
+    private val PICK_IMAGE_REQUEST = 71
+    private var filePath: Uri? = null
+    private var currentPosition = -1
+
+    private var adapter: PhotosAdapter? = null
+    private var storageReference: StorageReference? = null
+
+    val bitmapList = arrayListOf<Bitmap>()
+    val list = arrayListOf<Photos>()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sign_up_photos, container, false)
+    ): View? = inflater.inflate(R.layout.fragment_sign_up_photos, container, false)
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        storageReference = FirebaseStorage.getInstance().reference
+
+        super.onViewCreated(view, savedInstanceState)
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
+        adapter = PhotosAdapter(list)
+        adapter?.onClick = object : PhotoClickListener {
+            override fun onClick(position: Int) {
+                currentPosition = position
+                val intent = Intent()
+                intent.type = "image/*"
+                intent.action = Intent.ACTION_GET_CONTENT
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST)
+            }
+
+        }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {
+            if (data == null || data.data == null) {
+                return
+            }
 
+            filePath = data.data
+            try {
+                val bitmap = MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, filePath)
+                uploadImage()
+                bitmapList.add(currentPosition, bitmap)
+
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    private fun uploadImage() {
+        if (filePath != null) {
+            val ref = storageReference?.child("uploads/" + UUID.randomUUID().toString())
+            val uploadTask = ref?.putFile(filePath!!)
+
+            val urlTask = uploadTask?.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
+                if (!task.isSuccessful) {
+                    task.exception?.let {
+                        throw it
+                    }
+                }
+                return@Continuation ref.downloadUrl
+            })?.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val downloadUri = task.result
+                    list.add(currentPosition, Photos(downloadUri.toString(), bitmapList[currentPosition]))
+                    adapter?.notifyItemChanged(currentPosition)
+                } else {
+                    // Handle failures
+                }
+            }?.addOnFailureListener {
+
+            }
+        } else {
+        }
+    }
 }
