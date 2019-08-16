@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.fragment_sign_up_photos.view.*
 
 data class Photos(
     val url: String? = null,
-    var bitmap: Bitmap
+    var bitmap: Bitmap?
 )
 
 class PhotosAdapter(private val list: ArrayList<Photos>) : RecyclerView.Adapter<PhotosAdapter.MultiViewHolder>() {

@@ -18,10 +18,14 @@ import com.codingblocks.tinder.adapters.Photos
 import com.codingblocks.tinder.adapters.PhotosAdapter
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.SetOptions
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
-import kotlinx.android.synthetic.main.fragment_sign_up_orientation.*
+import kotlinx.android.synthetic.main.fragment_sign_up_photos.*
 import java.io.IOException
 import java.util.*
 
@@ -37,7 +41,10 @@ class SignUpPhotos : Fragment() {
 
     val bitmapList = arrayListOf<Bitmap>()
     val list = arrayListOf<Photos>()
-
+    var selectedList = arrayListOf<String>()
+    val db by lazy {
+        FirebaseAuth.getInstance().uid?.let { Firebase.firestore.collection("users").document(it) }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,10 +54,18 @@ class SignUpPhotos : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         storageReference = FirebaseStorage.getInstance().reference
+        for (i in 0..9) {
+            list.add(Photos(null, null))
+        }
+
 
         super.onViewCreated(view, savedInstanceState)
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
         adapter = PhotosAdapter(list)
+        recyclerView.adapter = adapter
+        adapter?.selectedList?.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            button.isEnabled = it.isNotEmpty()
+        })
         adapter?.onClick = object : PhotoClickListener {
             override fun onClick(position: Int) {
                 currentPosition = position
@@ -58,6 +73,28 @@ class SignUpPhotos : Fragment() {
                 intent.type = "image/*"
                 intent.action = Intent.ACTION_GET_CONTENT
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST)
+            }
+
+        }
+        button.setOnClickListener {
+            button.isEnabled = false
+            FirebaseAuth.getInstance().uid?.let { uid ->
+                val user = hashMapOf(
+                    "photos" to list.filter { !it.url.isNullOrBlank() }.map { it.url }
+                )
+
+                db?.set(user, SetOptions.merge())
+            }.also {
+                it?.apply {
+                    addOnSuccessListener {
+                        button.isEnabled = true
+//                        fragmentManager?.commitWithAnimation(SignUpInterestedIn(), "Orientation")
+                    }
+                    addOnFailureListener {
+                        button.isEnabled = true
+                    }
+                }
+
             }
 
         }
