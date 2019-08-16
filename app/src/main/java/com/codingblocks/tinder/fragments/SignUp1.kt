@@ -15,7 +15,6 @@ import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_sign_up1.*
-import org.jetbrains.anko.indeterminateProgressDialog
 import java.util.regex.Pattern
 
 
@@ -43,29 +42,27 @@ class SignUp1 : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        db?.get()?.addOnSuccessListener { document ->
+            if (document != null) {
+                editText.setText(document.getString("email"))
+            }
+        }
         editText.addTextChangedListener {
             button.isEnabled = EMAIL_ADDRESS_PATTERN.matcher(it.toString()).matches() && it.toString().isNotEmpty()
         }
-        val dialog = requireContext().indeterminateProgressDialog("")
         button.setOnClickListener {
+            button.isEnabled = false
             FirebaseAuth.getInstance().uid?.let { uid ->
-                val user = hashMapOf("Email" to editText.text.toString())
+                val user = hashMapOf("email" to editText.text.toString())
                 db?.set(user, SetOptions.merge())
             }.also {
                 it?.apply {
-                    addOnCompleteListener {
-                        button.isEnabled = false
-                        dialog.show()
-                    }
                     addOnSuccessListener {
                         button.isEnabled = true
-                        dialog.hide()
                         fragmentManager?.commitWithAnimation(SignUp2(), "Email")
                     }
                     addOnFailureListener {
                         button.isEnabled = true
-                        dialog.hide()
                         Toast.makeText(requireContext(), it.localizedMessage, Toast.LENGTH_LONG).show()
                     }
                 }

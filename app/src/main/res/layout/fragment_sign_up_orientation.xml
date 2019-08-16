@@ -45,8 +45,9 @@
             android:layout_alignStart="@id/textView2"
             android:layout_below="@+id/description"
             android:id="@+id/recyclerView"
-            android:layout_above="@id/checkbox"
+            android:layout_above="@id/orientation_checkbox"
             android:scrollbars="none"
+            android:overScrollMode="never"
             android:layout_marginBottom="16dp"
             android:layout_marginEnd="48dp"
             android:layout_width="match_parent"
@@ -54,7 +55,7 @@
             android:layout_height="wrap_content"/>
 
     <CheckBox
-            android:id="@+id/checkbox"
+            android:id="@+id/orientation_checkbox"
             android:layout_above="@id/button"
             android:layout_marginBottom="16dp"
             android:layout_centerHorizontal="true"
