@@ -4,4 +4,5 @@
     <dimen name="margin_large">32dp</dimen>
     <dimen name="margin_small">16dp</dimen>
     <dimen name="large_heading">42sp</dimen>
+    <dimen name="space_s">16dp</dimen>
 </resources>

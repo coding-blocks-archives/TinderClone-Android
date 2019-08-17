@@ -7,10 +7,12 @@ data class User(
     val university: String,
     val photos: ArrayList<String>,
     val show_gender: Boolean = false,
-    val show_orientation: Boolean = false
+    val show_orientation: Boolean = false,
+    val gender:Int,
+    val interested:Int
 ) {
     constructor() : this(
         "", "", "", "", arrayListOf<String>(),
-        false, false
+        false, false,-1,-1
     )
 }
