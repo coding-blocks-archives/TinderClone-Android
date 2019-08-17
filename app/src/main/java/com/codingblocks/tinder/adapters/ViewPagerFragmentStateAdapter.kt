@@ -4,16 +4,27 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.codingblocks.tinder.fragments.AboutFragment
 import com.codingblocks.tinder.fragments.PagerFragment
 
 class ViewPagerFragmentStateAdapter(fm: FragmentActivity) : FragmentStateAdapter(fm) {
     override fun createFragment(position: Int): Fragment {
-        return PagerFragment().apply {
-            arguments = bundleOf(
-                "color" to colors[position],
-                "position" to position
-            )
+        return when (position) {
+            0 -> AboutFragment()
+            1, 2 -> PagerFragment().apply {
+                arguments = bundleOf(
+                    "color" to colors[position],
+                    "position" to position
+                )
 
+            }
+            else -> PagerFragment().apply {
+                arguments = bundleOf(
+                    "color" to colors[position],
+                    "position" to position
+                )
+
+            }
         }
     }
 
