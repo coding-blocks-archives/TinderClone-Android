@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import com.codingblocks.tinder.HomeActivity
 import com.codingblocks.tinder.R
 import com.codingblocks.tinder.adapters.PhotoClickListener
 import com.codingblocks.tinder.adapters.Photos
@@ -88,7 +89,8 @@ class SignUpPhotos : Fragment() {
                 it?.apply {
                     addOnSuccessListener {
                         button.isEnabled = true
-//                        fragmentManager?.commitWithAnimation(SignUpInterestedIn(), "Orientation")
+                        requireActivity().finish()
+                        startActivity(Intent(requireActivity(), HomeActivity::class.java))
                     }
                     addOnFailureListener {
                         button.isEnabled = true

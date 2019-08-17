@@ -11,8 +11,11 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".SignUpActivity"
-        android:windowSoftInputMode="adjustResize">
+        <activity android:name=".HomeActivity">
+        </activity>
+        <activity
+                android:name=".SignUpActivity"
+                android:windowSoftInputMode="adjustResize">
         </activity>
         <activity android:name=".OtpActivity"/>
         <activity android:name=".LoginActivity"/>

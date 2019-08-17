@@ -22,6 +22,8 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_otp.*
 import java.util.concurrent.TimeUnit
 
@@ -39,6 +41,10 @@ class OtpActivity : AppCompatActivity() {
     private lateinit var mCallbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
 
     private var otp = arrayOfNulls<EditText>(6)
+
+    val db by lazy {
+        Firebase.firestore.collection("users")
+    }
 
     private val SMS_CONSENT_REQUEST = 2  // Set to an unused request code
     private val smsVerificationReceiver = object : BroadcastReceiver() {
@@ -208,9 +214,21 @@ class OtpActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithCredential:success")
-
-                    with(Intent(this,SignUpActivity::class.java)){
-                        startActivity(this)
+                    val uid = task.result?.user?.uid
+                    uid?.let {
+                        db.document(it).get().addOnSuccessListener {
+                            if (it != null && it["photos"] != null) {
+                                with(Intent(this, HomeActivity::class.java)) {
+                                    flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                                    startActivity(this)
+                                }
+                                finish()
+                            } else {
+                                with(Intent(this, SignUpActivity::class.java)) {
+                                    startActivity(this)
+                                }
+                            }
+                        }
                     }
 
                 } else {

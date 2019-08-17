@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        tools:context=".HomeActivity">
+
+    <com.google.android.material.tabs.TabLayout
+            android:layout_width="match_parent"
+            app:tabIndicatorHeight="0dp"
+            android:id="@+id/tab_layout"
+
+            android:layout_height="wrap_content">
+
+        <com.google.android.material.tabs.TabItem
+                android:icon="@drawable/ic_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+        />
+
+        <com.google.android.material.tabs.TabItem
+                android:icon="@drawable/ic_tinder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+        />
+
+        <com.google.android.material.tabs.TabItem
+                android:icon="@drawable/ic_chat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+        />
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+</LinearLayout>
