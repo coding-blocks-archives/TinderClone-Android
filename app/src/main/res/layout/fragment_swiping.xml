@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".fragments.SwipingFragment">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              tools:context=".fragments.SwipingFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.yuyakaido.android.cardstackview.CardStackView
+            android:id="@+id/card_stack_view"
             android:layout_width="match_parent"
+            android:layout_marginBottom="200dp"
             android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment"/>
+            android:padding="4dp"
+            android:clipToPadding="false">
+    </com.yuyakaido.android.cardstackview.CardStackView>
 
-</FrameLayout>
+</LinearLayout>

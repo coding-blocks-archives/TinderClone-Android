@@ -7,7 +7,7 @@
         <item name="colorPrimaryDark">@android:color/black</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:fontFamily">@font/varela_round</item>
+        <item name="android:fontFamily">@font/proximanova_bold</item>
 
     </style>
 
@@ -27,7 +27,7 @@
 
     <style name="chipTextAppearance" parent="TextAppearance.MaterialComponents.Chip">
         <item name="android:textSize">22sp</item>
-        <item name="android:fontFamily">@font/varela_round</item>
+        <item name="android:fontFamily">@font/proximanova_bold</item>
 
     </style>
 
