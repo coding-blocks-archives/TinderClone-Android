@@ -4,13 +4,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.codingblocks.tinder.R
 import com.codingblocks.tinder.fragments.User
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_swipe_cards.view.*
-import android.widget.LinearLayout
-
 
 
 class CardStackAdapter(
@@ -46,12 +45,19 @@ class CardStackAdapter(
 
                     val params = LinearLayout.LayoutParams(
                         100,
-                        25, 1f
+                        5, 1f
                     )
                     params.setMargins(4, 10, 4, 0)
 
                     itemView.indicator_ll.addView(indicators[index],params)
-                    Picasso.get().load(s).centerCrop().fetch()
+                    if (index == 0) {
+                        Picasso.get().load(s).into(itemView.item_image)
+                        indicators[index]?.setImageDrawable(itemView.resources.getDrawable(R.drawable.selecteditem))
+
+                    } else {
+                        Picasso.get().load(s).fetch()
+
+                    }
                 }
             }
         }

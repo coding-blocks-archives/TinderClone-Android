@@ -6,12 +6,14 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.codingblocks.tinder.fragments.AboutFragment
 import com.codingblocks.tinder.fragments.PagerFragment
+import com.codingblocks.tinder.fragments.SwipingFragment
 
 class ViewPagerFragmentStateAdapter(fm: FragmentActivity) : FragmentStateAdapter(fm) {
     override fun createFragment(position: Int): Fragment {
         return when (position) {
             0 -> AboutFragment()
-            1, 2 -> PagerFragment().apply {
+            1 -> SwipingFragment()
+            2 -> PagerFragment().apply {
                 arguments = bundleOf(
                     "color" to colors[position],
                     "position" to position
