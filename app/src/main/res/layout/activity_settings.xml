@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:overScrollMode="never"
+            android:background="@color/off_white"
+            android:layout_width="match_parent" android:layout_height="match_parent">
 <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent" android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
@@ -13,11 +18,12 @@
               android:textSize="22sp"
               android:layout_marginTop="16dp"
               android:textColor="@color/black"
-              android:text="Account Settings"
+              android:text="Discovery Settings"
               android:layout_height="wrap_content"/>
 
     <com.google.android.material.card.MaterialCardView
             app:contentPadding="16dp"
+            android:visibility="gone"
             android:layout_marginTop="8dp"
             android:backgroundTint="@color/white"
             android:layout_width="match_parent"
@@ -52,11 +58,38 @@
     <TextView
             android:layout_marginTop="8dp"
             android:textSize="12sp"
+            android:visibility="gone"
             android:fontFamily="sans-serif"
             android:text="Verify a phone number to help secure your account"
             android:textColor="@color/gray"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+    <com.google.android.material.card.MaterialCardView
+            app:contentPadding="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <TextView
+                android:text="Show Me"
+                android:textSize="18sp"
+                android:textColor="@color/tinder_accent"
+                android:fontFamily="@font/proximanova_bold"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        <TextView
+                android:id="@+id/interstedTv"
+                android:textSize="18sp"
+                android:layout_marginTop="32dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/proximanova_regular"
+                android:text="Women"
+                android:drawableEnd="@drawable/ic_chevron_left_grey_700_24dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+    </com.google.android.material.card.MaterialCardView>
     <com.google.android.material.card.MaterialCardView
             app:contentPadding="16dp"
             android:layout_marginTop="8dp"
@@ -77,18 +110,21 @@
                 android:textSize="18sp"
                 android:textColor="@color/black"
                 android:fontFamily="@font/proximanova_bold"
-                tools:text="22 - 40"
+                android:text="2Km"
+                android:id="@+id/distance_text"
                 android:layout_gravity="right|end" android:layout_width="wrap_content"
-                android:layout_height="match_parent"/>
+                android:layout_height="wrap_content"/>
 
         <io.apptik.widget.MultiSlider
                 app:rangeColor="@color/tinder_accent"
                 android:layout_marginTop="34dp"
                 android:layout_gravity="bottom"
+                android:id="@+id/distance_slider"
                 app:thumbColor="@color/tinder_accent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:thumbNumber="2"
+                app:thumbNumber="1"
+                app:scaleMax="159"
                 app:stepsThumbsApart="5"
                 app:drawThumbsApart="true"
 
@@ -113,21 +149,22 @@
         <TextView
                 android:textSize="18sp"
                 android:textColor="@color/black"
+                android:id="@+id/age_text"
                 android:fontFamily="@font/proximanova_bold"
-                tools:text="22 - 40"
+                android:text="18 - 55+"
                 android:layout_gravity="right|end" android:layout_width="wrap_content"
-                android:layout_height="match_parent"/>
+                android:layout_height="wrap_content"/>
 
         <io.apptik.widget.MultiSlider
                 app:thumbColor="@color/tinder_accent"
                 app:rangeColor="@color/tinder_accent"
                 android:layout_marginTop="34dp"
                 android:layout_gravity="bottom"
-                android:id="@+id/range_slider5"
+                android:id="@+id/age_slider"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:thumbNumber="2"
-                app:stepsThumbsApart="5"
+                app:scaleMax="37"
                 app:drawThumbsApart="true"
 
         />
@@ -152,6 +189,7 @@
             android:layout_height="wrap_content">
 
         <Switch
+                android:id="@+id/visibleSwitch"
                 android:text="Show me on Tinder"
                 android:textColor="@color/black"
                 android:layout_width="match_parent"
@@ -168,10 +206,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
+    <TextView android:layout_width="wrap_content"
+              android:textSize="22sp"
+              android:layout_marginTop="16dp"
+              android:textColor="@color/black"
+              android:text="Contact Us"
+              android:layout_height="wrap_content"/>
+
 
     <com.google.android.material.card.MaterialCardView
             app:contentPadding="16dp"
             android:layout_marginTop="8dp"
+            android:id="@+id/logoutBtn"
             android:backgroundTint="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -187,16 +233,26 @@
 
     <ImageView
             android:layout_marginTop="36dp"
-            android:layout_marginBottom="36dp"
             android:layout_gravity="center"
             android:tint="@color/tinder_accent"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
             android:src="@drawable/ic_tinder"/>
 
+    <TextView
+            android:layout_marginBottom="36dp"
+            android:layout_gravity="center"
+            android:fontFamily="@font/proximanova_regular"
+            android:textColor="@color/gray"
+            android:text="Version 10.20.0(10200026)"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+    />
+
 
     <com.google.android.material.card.MaterialCardView
             app:contentPadding="16dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"
+            android:id="@+id/deleteBtn"
             android:backgroundTint="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -211,3 +267,4 @@
 
 
 </LinearLayout>
+</ScrollView>
