@@ -57,9 +57,46 @@
             android:textColor="@color/gray"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-
     <com.google.android.material.card.MaterialCardView
             app:contentPadding="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <TextView
+                android:text="Maximum Distance"
+                android:textSize="18sp"
+                android:textColor="@color/tinder_accent"
+                android:fontFamily="@font/proximanova_bold"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        <TextView
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/proximanova_bold"
+                tools:text="22 - 40"
+                android:layout_gravity="right|end" android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
+
+        <io.apptik.widget.MultiSlider
+                app:rangeColor="@color/tinder_accent"
+                android:layout_marginTop="34dp"
+                android:layout_gravity="bottom"
+                app:thumbColor="@color/tinder_accent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:thumbNumber="2"
+                app:stepsThumbsApart="5"
+                app:drawThumbsApart="true"
+
+        />
+    </com.google.android.material.card.MaterialCardView>
+    <com.google.android.material.card.MaterialCardView
+            app:contentPadding="16dp"
+            android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
             android:backgroundTint="@color/white"
             android:layout_width="match_parent"
@@ -82,7 +119,9 @@
                 android:layout_height="match_parent"/>
 
         <io.apptik.widget.MultiSlider
-                android:layout_marginTop="26dp"
+                app:thumbColor="@color/tinder_accent"
+                app:rangeColor="@color/tinder_accent"
+                android:layout_marginTop="34dp"
                 android:layout_gravity="bottom"
                 android:id="@+id/range_slider5"
                 android:layout_width="match_parent"
@@ -94,9 +133,20 @@
         />
     </com.google.android.material.card.MaterialCardView>
 
+    <TextView
+            android:textSize="12sp"
+            android:fontFamily="sans-serif"
+            android:text="@string/age_desc"
+            android:layout_marginEnd="16dp"
+            android:textColor="@color/gray"
+            android:layout_marginBottom="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
     <com.google.android.material.card.MaterialCardView
             app:contentPadding="16dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:backgroundTint="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -104,10 +154,19 @@
         <Switch
                 android:text="Show me on Tinder"
                 android:textColor="@color/black"
-                android:fontFamily="@font/ProximaNova-Regular"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
     </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+            android:textSize="12sp"
+            android:fontFamily="sans-serif"
+            android:layout_marginEnd="16dp"
+            android:text="You won't show up in the card stack but can still message your existing matches"
+            android:textColor="@color/gray"
+            android:layout_marginBottom="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
 
     <com.google.android.material.card.MaterialCardView
@@ -124,6 +183,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
     </com.google.android.material.card.MaterialCardView>
+
+
+    <ImageView
+            android:layout_marginTop="36dp"
+            android:layout_marginBottom="36dp"
+            android:layout_gravity="center"
+            android:tint="@color/tinder_accent"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:src="@drawable/ic_tinder"/>
 
 
     <com.google.android.material.card.MaterialCardView

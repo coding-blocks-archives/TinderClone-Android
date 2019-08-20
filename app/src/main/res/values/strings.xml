@@ -12,4 +12,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="age_desc">Tinder uses these preferences to suggest matches.\nSome match suggestions may not fall within
+        your desired parameters.
+    </string>
 </resources>

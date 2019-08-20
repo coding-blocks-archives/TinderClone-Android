@@ -119,10 +119,7 @@ class OtpActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onCodeSent(
-                verificationId: String?,
-                token: PhoneAuthProvider.ForceResendingToken
-            ) {
+            override fun onCodeSent(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
                 mVerificationId = verificationId
                 mResendToken = token
                 mVerificationInProgress = true
