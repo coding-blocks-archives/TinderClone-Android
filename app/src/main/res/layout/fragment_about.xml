@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
+              xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_height="match_parent"
               android:orientation="vertical"
               android:gravity="center_horizontal"
               tools:context=".fragments.AboutFragment">
@@ -17,7 +17,7 @@
             android:textSize="22sp"
             android:id="@+id/nameTv"
             android:layout_marginTop="8dp"
-            android:fontFamily="@font/varela_round"
+            android:fontFamily="@font/proximanova_bold"
             android:textColor="@android:color/black"
             tools:text="Pulkit, 22"
             android:layout_width="wrap_content"
@@ -26,8 +26,7 @@
             android:textSize="16sp"
             android:id="@+id/collegeTv"
             android:layout_marginTop="4dp"
-            android:fontFamily="@font/varela_round"
-            android:textColor="@android:color/secondary_text_dark"
+            android:textColor="@android:color/black"
             tools:text="University of Delhi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -45,14 +44,18 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content">
 
-            <ImageButton
-                    android:src="@android:drawable/ic_menu_edit"
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:src="@drawable/ic_settings"
                     android:id="@+id/settings"
+                    app:borderWidth="0dp"
+                    android:backgroundTint="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             <TextView
                     android:textColor="@color/battleship_gray"
                     android:text="SETTINGS"
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
@@ -66,14 +69,16 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content">
 
-            <ImageView
-                    android:src="@drawable/ic_media_btn"
+            <ImageButton
                     android:id="@+id/media"
+                    android:background="@drawable/ic_media_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             <TextView
                     android:textColor="@color/battleship_gray"
                     android:text="ADD MEDIA"
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
@@ -85,14 +90,18 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content">
 
-            <ImageButton
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:src="@android:drawable/ic_menu_edit"
                     android:id="@+id/info"
+                    android:backgroundTint="@color/white"
+                    app:borderWidth="0dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             <TextView
                     android:textColor="@color/battleship_gray"
                     android:text="EDIT INFO"
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 

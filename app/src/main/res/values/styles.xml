@@ -37,7 +37,7 @@
         <item name="android:textColor">@color/chip_text_color</item>
         <item name="android:textAlignment">center</item>
         <item name="chipBackgroundColor">@android:color/white</item>
-        <item name="android:paddingTop">16dp</item>
+        <item name="chipMinHeight">50dp</item>
         <item name="chipStrokeWidth">2dp</item>
         <item name="chipCornerRadius">30dp</item>
     </style>

@@ -46,7 +46,7 @@ class CardStackAdapter(
 
                     val params = LinearLayout.LayoutParams(
                         100,
-                        5, 1f
+                        8, 1f
                     )
                     params.setMargins(4, 10, 4, 0)
 
