@@ -8,12 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import androidx.fragment.app.Fragment
-import com.codingblocks.tinder.R
 import androidx.recyclerview.widget.DefaultItemAnimator
+import com.codingblocks.tinder.R
 import com.codingblocks.tinder.adapters.CardStackAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObjects
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.yuyakaido.android.cardstackview.*
 import kotlinx.android.synthetic.main.fragment_swiping.*
@@ -38,10 +38,24 @@ class SwipingFragment : Fragment(), CardStackListener {
     }
 
     private fun fetchUsers() {
-        usersDb.get().addOnSuccessListener { querySnapshot ->
-            val list = querySnapshot.toObjects<User>()
-            cardStackAdapter.setUsers(list)
-            cardStackAdapter.notifyDataSetChanged()
+        val list = arrayListOf<User>()
+        usersDb.whereEqualTo("gender","1").get().addOnSuccessListener { querySnapshot ->
+            querySnapshot.documents.forEach {
+                val user = it.toObject<User>()
+                usersDb.document("$uid/liked_people/${user?.auth_id}").get()
+                    .addOnSuccessListener {
+                        Log.d("Failure", "${user?.name} + ${it.exists()}")
+                        if(it.exists() == false){
+                            if (user != null) {
+                                Log.d("Failure", "$user")
+                                list.add(user)
+                                cardStackAdapter.setUsers(list)
+                                cardStackAdapter.notifyDataSetChanged()
+                            }
+                        }
+
+                    }
+            }
         }
     }
 
