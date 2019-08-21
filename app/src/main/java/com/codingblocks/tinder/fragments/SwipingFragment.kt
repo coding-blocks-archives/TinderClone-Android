@@ -39,19 +39,23 @@ class SwipingFragment : Fragment(), CardStackListener {
 
     private fun fetchUsers() {
         val list = arrayListOf<User>()
-        usersDb.whereEqualTo("gender","1").get().addOnSuccessListener { querySnapshot ->
+        usersDb.get().addOnSuccessListener { querySnapshot ->
             querySnapshot.documents.forEach {
                 val user = it.toObject<User>()
                 usersDb.document("$uid/liked_people/${user?.auth_id}").get()
                     .addOnSuccessListener {
-                        Log.d("Failure", "${user?.name} + ${it.exists()}")
-                        if(it.exists() == false){
-                            if (user != null) {
-                                Log.d("Failure", "$user")
-                                list.add(user)
-                                cardStackAdapter.setUsers(list)
-                                cardStackAdapter.notifyDataSetChanged()
-                            }
+                        if (!it.exists() || it["request_type"]?.equals("received")!!) {
+                            usersDb.document("$uid/matches/${user?.auth_id}").get()
+                                .addOnSuccessListener {
+                                    if (!it.exists()) {
+                                        if (user != null) {
+                                            list.add(user)
+                                            cardStackAdapter.setUsers(list)
+                                            cardStackAdapter.notifyDataSetChanged()
+                                        }
+                                    }
+                                }
+
                         }
 
                     }
@@ -97,14 +101,67 @@ class SwipingFragment : Fragment(), CardStackListener {
             "onCardSwiped: p = ${manager.topPosition}, d = $direction, listElement = ${cardStackAdapter.getUsers()[manager.topPosition - 1]}"
         )
         if (direction?.name == "Right") {
-            sendlike(cardStackAdapter.getUsers()[manager.topPosition - 1])
+            checkMatch(cardStackAdapter.getUsers()[manager.topPosition - 1])
         }
 
 
     }
 
-    private fun sendlike(user: User) {
-        val notificatoinRef = usersDb.document(user.auth_id).collection("notifications").document()
+    private fun checkMatch(user: User) {
+//        val notificatoinRef = usersDb.document(user.auth_id).collection("notifications").document()
+//        val newNotificationId = notificatoinRef.id
+//        val likeMap = hashMapOf(
+//            "request_type" to "send",
+//            "id" to newNotificationId
+//        )
+//
+//        usersDb.document(uid ?: "")
+//            .collection("liked_people").document(user.auth_id).set(likeMap).addOnSuccessListener {
+//                //update request type
+//                likeMap["request_type"] = "recieved"
+//
+//                usersDb.document(user.auth_id).collection("liked_people")
+//                    .document(uid ?: "").set(likeMap)
+//            }
+
+        usersDb.document("$uid/liked_people/${user.auth_id}").get()
+            .addOnSuccessListener {
+                if (it.exists()) { //case of a match
+                    addToMatches(user)
+                } else { //case of a new like
+                    sendLike(user.auth_id)
+                }
+            }
+
+
+    }
+
+    private fun addToMatches(user: User) {
+        val matchMap = hashMapOf(
+            "date" to System.currentTimeMillis(),
+            "name" to user.name
+        )
+        usersDb.document("$uid/liked_people/${user.auth_id}")
+            .delete()
+            .addOnSuccessListener {
+                usersDb.document("${user.auth_id}/liked_people/$uid")
+                    .delete()
+                    .addOnSuccessListener {
+                        usersDb.document("$uid/matches/${user.auth_id}")
+                            .set(matchMap)
+                            .addOnSuccessListener {
+                                matchMap["name"] = "Pulkit"
+                                usersDb.document("${user.auth_id}/matches/$uid")
+                                    .set(matchMap)
+                            }
+
+                    }
+            }
+
+    }
+
+    private fun sendLike(authId: String) {
+        val notificatoinRef = usersDb.document(authId).collection("notifications").document()
         val newNotificationId = notificatoinRef.id
         val likeMap = hashMapOf(
             "request_type" to "send",
@@ -112,14 +169,13 @@ class SwipingFragment : Fragment(), CardStackListener {
         )
 
         usersDb.document(uid ?: "")
-            .collection("liked_people").document(user.auth_id).set(likeMap).addOnSuccessListener {
+            .collection("liked_people").document(authId).set(likeMap).addOnSuccessListener {
                 //update request type
-                likeMap["request_type"] = "recieved"
+                likeMap["request_type"] = "received"
 
-                usersDb.document(user.auth_id).collection("liked_people")
+                usersDb.document(authId).collection("liked_people")
                     .document(uid ?: "").set(likeMap)
             }
-
     }
 
     override fun onCardCanceled() {
