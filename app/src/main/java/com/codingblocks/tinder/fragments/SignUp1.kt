@@ -53,7 +53,10 @@ class SignUp1 : Fragment() {
         button.setOnClickListener {
             button.isEnabled = false
             FirebaseAuth.getInstance().uid?.let { uid ->
-                val user = hashMapOf("email" to editText.text.toString())
+                val user = hashMapOf(
+                    "email" to editText.text.toString(),
+                    "auth_id" to uid
+                )
                 db?.set(user, SetOptions.merge())
             }.also {
                 it?.apply {

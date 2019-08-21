@@ -9,10 +9,11 @@ data class User(
     val show_gender: Boolean = false,
     val show_orientation: Boolean = false,
     val gender:Int,
-    val interested:Int
+    val interested:Int,
+    val auth_id:String
 ) {
     constructor() : this(
         "", "", "", "", arrayListOf<String>(),
-        false, false,-1,-1
+        false, false,-1,-1,""
     )
 }

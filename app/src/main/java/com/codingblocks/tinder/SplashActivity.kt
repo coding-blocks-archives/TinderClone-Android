@@ -14,6 +14,7 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         if(FirebaseAuth.getInstance().currentUser != null){
             startActivity(Intent(this,HomeActivity::class.java))
+            finish()
         }
         mobileBtn.setOnClickListener {
             startActivity(Intent(this,LoginActivity::class.java))
