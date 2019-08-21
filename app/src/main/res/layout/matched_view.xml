@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:background="#80000000"
+              android:paddingEnd="32dp"
+              android:paddingStart="32dp"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:src="@drawable/matchscreen_headlinetext_img"
+            android:id="@+id/imageView2"/>
+
+    <TextView
+            android:layout_gravity="center"
+            android:textSize="18sp"
+            android:text="You guys liked each other"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_marginTop="32dp"
+            android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="120dp"
+                app:civ_border_width="2dp"
+                android:id="@+id/current_user"
+                app:civ_border_color="@color/white"
+                android:layout_marginEnd="16dp"
+                android:layout_height="120dp"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="120dp"
+                android:id="@+id/matched_user"
+                app:civ_border_width="2dp"
+                app:civ_border_color="@color/white"
+                android:layout_marginStart="16dp"
+                android:layout_height="120dp"/>
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+            android:text="Send Message"
+            android:textSize="20sp"
+            android:layout_marginTop="64dp"
+            android:background="@drawable/button_primary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+</LinearLayout>

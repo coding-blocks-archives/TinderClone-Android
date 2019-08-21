@@ -15,8 +15,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
+import com.squareup.picasso.Picasso
 import com.yuyakaido.android.cardstackview.*
 import kotlinx.android.synthetic.main.fragment_swiping.*
+import kotlinx.android.synthetic.main.matched_view.view.*
 
 
 class SwipingFragment : Fragment(), CardStackListener {
@@ -108,25 +110,13 @@ class SwipingFragment : Fragment(), CardStackListener {
     }
 
     private fun checkMatch(user: User) {
-//        val notificatoinRef = usersDb.document(user.auth_id).collection("notifications").document()
-//        val newNotificationId = notificatoinRef.id
-//        val likeMap = hashMapOf(
-//            "request_type" to "send",
-//            "id" to newNotificationId
-//        )
-//
-//        usersDb.document(uid ?: "")
-//            .collection("liked_people").document(user.auth_id).set(likeMap).addOnSuccessListener {
-//                //update request type
-//                likeMap["request_type"] = "recieved"
-//
-//                usersDb.document(user.auth_id).collection("liked_people")
-//                    .document(uid ?: "").set(likeMap)
-//            }
 
         usersDb.document("$uid/liked_people/${user.auth_id}").get()
             .addOnSuccessListener {
                 if (it.exists()) { //case of a match
+                    matched_view.visibility = View.VISIBLE
+                    Picasso.get().load(user.photos[0]).into(matched_view.matched_user)
+                    Picasso.get().load(user.photos[0]).into(matched_view.current_user)
                     addToMatches(user)
                 } else { //case of a new like
                     sendLike(user.auth_id)
