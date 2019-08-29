@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_margin="4dp"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profileImgView"
+            android:layout_width="65dp"
+            android:src="@drawable/flag_bahamas"
+            android:layout_height="65dp" />
+
+    <TextView
+            android:textColor="@color/black"
+            tools:text="Pulkit"
+            android:layout_marginTop="8dp"
+            android:textSize="14sp"
+            android:id="@+id/nameTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+</LinearLayout>

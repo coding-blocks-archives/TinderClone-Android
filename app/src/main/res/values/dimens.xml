@@ -5,4 +5,10 @@
     <dimen name="margin_small">16dp</dimen>
     <dimen name="large_heading">42sp</dimen>
     <dimen name="space_s">16dp</dimen>
+    <dimen name="text_m">30sp</dimen>
+    <dimen name="text_s">24sp</dimen>
+    <dimen name="text_sm">26sp</dimen>
+    <dimen name="text_xs">20sp</dimen>
+    <dimen name="text_xxlarge">50sp</dimen>
+    <dimen name="text_xxxs">15sp</dimen>
 </resources>

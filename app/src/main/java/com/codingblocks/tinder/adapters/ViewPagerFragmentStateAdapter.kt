@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.codingblocks.tinder.fragments.AboutFragment
+import com.codingblocks.tinder.fragments.MessagesFragment
 import com.codingblocks.tinder.fragments.PagerFragment
 import com.codingblocks.tinder.fragments.SwipingFragment
 
@@ -13,13 +14,7 @@ class ViewPagerFragmentStateAdapter(fm: FragmentActivity) : FragmentStateAdapter
         return when (position) {
             0 -> AboutFragment()
             1 -> SwipingFragment()
-            2 -> PagerFragment().apply {
-                arguments = bundleOf(
-                    "color" to colors[position],
-                    "position" to position
-                )
-
-            }
+            2 -> MessagesFragment()
             else -> PagerFragment().apply {
                 arguments = bundleOf(
                     "color" to colors[position],
