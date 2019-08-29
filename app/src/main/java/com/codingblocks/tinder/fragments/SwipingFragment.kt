@@ -1,12 +1,14 @@
 package com.codingblocks.tinder.fragments
 
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
+import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import com.codingblocks.tinder.R
@@ -27,7 +29,9 @@ class SwipingFragment : Fragment(), CardStackListener {
     private val cardStackAdapter by lazy { CardStackAdapter() }
     private val usersDb by lazy { Firebase.firestore.collection("users") }
     private val uid by lazy { FirebaseAuth.getInstance().uid }
-
+    private val sharedPrefs by lazy {
+        requireActivity().getPreferences(Context.MODE_PRIVATE)
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,7 +45,7 @@ class SwipingFragment : Fragment(), CardStackListener {
 
     private fun fetchUsers() {
         val list = arrayListOf<User>()
-        usersDb.get().addOnSuccessListener { querySnapshot ->
+        usersDb.whereEqualTo("gender", sharedPrefs.getString(INTERSTEDIN,"")).get().addOnSuccessListener { querySnapshot ->
             querySnapshot.documents.forEach {
                 val user = it.toObject<User>()
                 usersDb.document("$uid/liked_people/${user?.auth_id}").get()
