@@ -32,6 +32,7 @@ class SwipingFragment : Fragment(), CardStackListener {
     private val sharedPrefs by lazy {
         requireActivity().getPreferences(Context.MODE_PRIVATE)
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,28 +46,29 @@ class SwipingFragment : Fragment(), CardStackListener {
 
     private fun fetchUsers() {
         val list = arrayListOf<User>()
-        usersDb.whereEqualTo("gender", sharedPrefs.getString(INTERSTEDIN,"")).get().addOnSuccessListener { querySnapshot ->
-            querySnapshot.documents.forEach {
-                val user = it.toObject<User>()
-                usersDb.document("$uid/liked_people/${user?.auth_id}").get()
-                    .addOnSuccessListener {
-                        if (!it.exists() || it["request_type"]?.equals("received")!!) {
-                            usersDb.document("$uid/matches/${user?.auth_id}").get()
-                                .addOnSuccessListener {
-                                    if (!it.exists()) {
-                                        if (user != null) {
-                                            list.add(user)
-                                            cardStackAdapter.setUsers(list)
-                                            cardStackAdapter.notifyDataSetChanged()
+        usersDb.whereEqualTo("gender", sharedPrefs.getString(INTERSTEDIN, "")).get()
+            .addOnSuccessListener { querySnapshot ->
+                querySnapshot.documents.forEach {
+                    val user = it.toObject<User>()
+                    usersDb.document("$uid/liked_people/${user?.auth_id}").get()
+                        .addOnSuccessListener {
+                            if (!it.exists() || it["request_type"]?.equals("received")!!) {
+                                usersDb.document("$uid/matches/${user?.auth_id}").get()
+                                    .addOnSuccessListener {
+                                        if (!it.exists()) {
+                                            if (user != null) {
+                                                list.add(user)
+                                                cardStackAdapter.setUsers(list)
+                                                cardStackAdapter.notifyDataSetChanged()
+                                            }
                                         }
                                     }
-                                }
+
+                            }
 
                         }
-
-                    }
+                }
             }
-        }
     }
 
     private fun setupCardStackView() {
@@ -133,7 +135,8 @@ class SwipingFragment : Fragment(), CardStackListener {
     private fun addToMatches(user: User) {
         val matchMap = hashMapOf(
             "date" to System.currentTimeMillis(),
-            "name" to user.name
+            "name" to user.name,
+            "photo" to user.photos[0]
         )
         usersDb.document("$uid/liked_people/${user.auth_id}")
             .delete()
@@ -145,6 +148,8 @@ class SwipingFragment : Fragment(), CardStackListener {
                             .set(matchMap)
                             .addOnSuccessListener {
                                 matchMap["name"] = "Pulkit"
+                                matchMap["photo"] = user.photos[0]
+
                                 usersDb.document("${user.auth_id}/matches/$uid")
                                     .set(matchMap)
                             }

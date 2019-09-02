@@ -42,7 +42,6 @@ class SignUpPhotos : Fragment() {
 
     val bitmapList = arrayListOf<Bitmap>()
     val list = arrayListOf<Photos>()
-    var selectedList = arrayListOf<String>()
     val db by lazy {
         FirebaseAuth.getInstance().uid?.let { Firebase.firestore.collection("users").document(it) }
     }
@@ -54,13 +53,12 @@ class SignUpPhotos : Fragment() {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         storageReference = FirebaseStorage.getInstance().reference
         for (i in 0..9) {
             list.add(Photos(null, null))
         }
-
-
-        super.onViewCreated(view, savedInstanceState)
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
         adapter = PhotosAdapter(list)
         recyclerView.adapter = adapter
@@ -73,7 +71,10 @@ class SignUpPhotos : Fragment() {
                 val intent = Intent()
                 intent.type = "image/*"
                 intent.action = Intent.ACTION_GET_CONTENT
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST)
+                startActivityForResult(
+                    Intent.createChooser(intent, "Select Picture"),
+                    PICK_IMAGE_REQUEST
+                )
             }
 
         }
@@ -111,7 +112,8 @@ class SignUpPhotos : Fragment() {
 
             filePath = data.data
             try {
-                val bitmap = MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, filePath)
+                val bitmap =
+                    MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, filePath)
                 uploadImage()
                 bitmapList.add(currentPosition, bitmap)
 
@@ -123,27 +125,37 @@ class SignUpPhotos : Fragment() {
 
     private fun uploadImage() {
         if (filePath != null) {
-            val ref = storageReference?.child("uploads/" + UUID.randomUUID().toString())
+            val imageId: String =
+                if (currentPosition == 0) {
+                    FirebaseAuth.getInstance().uid.toString()
+                } else {
+                    UUID.randomUUID().toString()
+                }
+            val ref = storageReference?.child("uploads/$imageId")
             val uploadTask = ref?.putFile(filePath!!)
 
-            val urlTask = uploadTask?.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
-                if (!task.isSuccessful) {
-                    task.exception?.let {
-                        throw it
+            val urlTask =
+                uploadTask?.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
+                    if (!task.isSuccessful) {
+                        task.exception?.let {
+                            throw it
+                        }
                     }
-                }
-                return@Continuation ref.downloadUrl
-            })?.addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val downloadUri = task.result
-                    list.add(currentPosition, Photos(downloadUri.toString(), bitmapList[currentPosition]))
-                    adapter?.notifyItemChanged(currentPosition)
-                } else {
-                    // Handle failures
-                }
-            }?.addOnFailureListener {
+                    return@Continuation ref.downloadUrl
+                })?.addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val downloadUri = task.result
+                        list.add(
+                            currentPosition,
+                            Photos(downloadUri.toString(), bitmapList[currentPosition])
+                        )
+                        adapter?.notifyItemChanged(currentPosition)
+                    } else {
+                        // Handle failures
+                    }
+                }?.addOnFailureListener {
 
-            }
+                }
         } else {
         }
     }

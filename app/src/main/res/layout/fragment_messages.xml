@@ -16,6 +16,7 @@
             android:textSize="16sp" />
 
     <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/matchesRv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -35,6 +36,7 @@
     <include layout="@layout/matches_no_messages_empty_view" />
 
     <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/messagesRv"
             android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
