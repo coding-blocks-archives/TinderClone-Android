@@ -9,15 +9,15 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profileImgView"
-            android:layout_width="65dp"
+            android:layout_width="80dp"
             android:src="@drawable/flag_bahamas"
-            android:layout_height="65dp" />
+            android:layout_height="80dp" />
 
     <TextView
             android:textColor="@color/black"
             tools:text="Pulkit"
             android:layout_marginTop="8dp"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:id="@+id/nameTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

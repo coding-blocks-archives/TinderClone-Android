@@ -14,6 +14,7 @@ import com.codingblocks.tinder.adapters.Matches
 import com.codingblocks.tinder.adapters.MatchesAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_messages.*
 
@@ -37,8 +38,13 @@ class MessagesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        matchesDb.
         matchesAdapter = MatchesAdapter(list)
+
+        matchesDb.get().addOnSuccessListener {
+           list.addAll( it.toObjects())
+            matchesAdapter?.notifyDataSetChanged()
+        }
+
         matchesRv.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = matchesAdapter

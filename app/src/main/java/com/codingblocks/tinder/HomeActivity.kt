@@ -17,9 +17,9 @@ class HomeActivity : AppCompatActivity() {
             TabLayoutMediator.OnConfigureTabCallback { tab, position ->
                 // Styling each tab here
                 when (position) {
-                    0 -> tab.setIcon(R.drawable.ic_user)
-                    1 -> tab.setIcon(R.drawable.ic_tinder)
-                    2 -> tab.setIcon(R.drawable.ic_chat)
+                    0 -> tab.setIcon(R.drawable.main_tab_ic_profile)
+                    1 -> tab.setIcon(R.drawable.main_tab_ic_recs)
+                    2 -> tab.setIcon(R.drawable.main_tab_ic_matches)
 
 
                 }

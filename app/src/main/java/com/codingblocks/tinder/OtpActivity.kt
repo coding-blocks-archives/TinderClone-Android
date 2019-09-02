@@ -149,6 +149,10 @@ class OtpActivity : AppCompatActivity() {
 
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(smsVerificationReceiver)
+    }
     private fun getOtp(): String {
         var code = ""
         otp.forEach {
