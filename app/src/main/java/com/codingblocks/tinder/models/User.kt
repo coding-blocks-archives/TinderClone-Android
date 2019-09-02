@@ -1,4 +1,4 @@
-package com.codingblocks.tinder.fragments
+package com.codingblocks.tinder.models
 
 data class User(
     val name: String,

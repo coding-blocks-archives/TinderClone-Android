@@ -4,10 +4,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.codingblocks.tinder.ChatActivity
 import com.codingblocks.tinder.R
-import com.codingblocks.tinder.fragments.User
+import com.codingblocks.tinder.models.Matches
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_match.view.*
+import org.jetbrains.anko.intentFor
 
 class MatchesAdapter(private val users: ArrayList<Matches>) :
     RecyclerView.Adapter<MatchesAdapter.MatchViewHolder>() {
@@ -33,7 +35,9 @@ class MatchesAdapter(private val users: ArrayList<Matches>) :
             itemView.nameTv.text = user.name
             Picasso.get().load(user.photo).into(itemView.profileImgView)
             itemView.setOnClickListener {
-                user.uid
+               with(it.context){
+                   startActivity(intentFor<ChatActivity>("uid" to user.uid,"name" to user.name))
+               }
             }
 
         }

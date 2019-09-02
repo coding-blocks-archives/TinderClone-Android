@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.codingblocks.tinder.R
-import com.codingblocks.tinder.fragments.User
+import com.codingblocks.tinder.models.User
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_swipe_cards.view.*
 

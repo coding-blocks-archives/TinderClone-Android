@@ -1,4 +1,4 @@
-package com.codingblocks.tinder.adapters
+package com.codingblocks.tinder.models
 
 class Matches(
     val uid: String,

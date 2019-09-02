@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.codingblocks.tinder.R
-import com.codingblocks.tinder.adapters.Matches
+import com.codingblocks.tinder.models.Matches
 import com.codingblocks.tinder.adapters.MatchesAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore

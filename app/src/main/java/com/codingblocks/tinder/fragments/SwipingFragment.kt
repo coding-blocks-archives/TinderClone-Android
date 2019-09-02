@@ -8,11 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
-import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import com.codingblocks.tinder.R
 import com.codingblocks.tinder.adapters.CardStackAdapter
+import com.codingblocks.tinder.models.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
@@ -46,7 +46,7 @@ class SwipingFragment : Fragment(), CardStackListener {
 
     private fun fetchUsers() {
         val list = arrayListOf<User>()
-        usersDb.whereEqualTo("gender", sharedPrefs.getString(INTERSTEDIN, "")).get()
+        usersDb.whereEqualTo("gender", sharedPrefs.getString(INTERSTEDIN, "2")).get()
             .addOnSuccessListener { querySnapshot ->
                 querySnapshot.documents.forEach {
                     val user = it.toObject<User>()
